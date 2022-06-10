@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId "id.creatodidak.e_disposisi"
-        minSdk 21
-        targetSdk 32
+        minSdk 19
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
@@ -71,6 +71,10 @@ dependencies {
 
     implementation 'com.nbsp:materialfilepicker:1.9.1'
 
+    /*File picker*/
+    implementation 'com.github.HBiSoft:PickiT:2.0.5'
 
+    /*Alert */
+    implementation 'com.github.TutorialsAndroid:KAlertDialog:v4.1'
 
 }

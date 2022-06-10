@@ -1,7 +1,10 @@
 package id.creatodidak.e_disposisi.API;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
+import id.creatodidak.e_disposisi.Config;
 import id.creatodidak.e_disposisi.model.AuthLogin;
 import id.creatodidak.e_disposisi.model.ResponseModel;
 import id.creatodidak.e_disposisi.model.SuratKeluar;
@@ -41,6 +44,10 @@ public interface ApiInterface {
     Call<ResponseModel> fileUpload(
             @Part("sender_information") RequestBody description,
             @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST(Config.UPLOAD_URL)
+    Call<JsonObject> uploadPdf(@Part("ff\"; filename=\"file.pdf\" ") RequestBody file, @Part("submit") RequestBody filename);
 
 
 }
