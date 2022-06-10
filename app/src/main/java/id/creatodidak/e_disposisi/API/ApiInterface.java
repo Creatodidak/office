@@ -47,7 +47,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST(Config.UPLOAD_URL)
-    Call<JsonObject> uploadPdf(@Part("ff\"; filename=\"file.pdf\" ") RequestBody file, @Part("submit") RequestBody filename);
+    Call<JsonObject> uploadPdf(@Part("ff\"; filename=\"file.pdf\" ") RequestBody file, @Part("submit") RequestBody filename, @Part("fname") RequestBody fsname);
 
 
 }

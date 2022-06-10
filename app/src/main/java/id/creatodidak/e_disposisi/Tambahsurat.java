@@ -64,6 +64,7 @@ public class Tambahsurat extends AppCompatActivity {
 
 
         TextView pickpdf = findViewById(R.id.pickpdf);
+        TextView judul_surat = findViewById(R.id.judul_surat);
         pickpdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +119,17 @@ public class Tambahsurat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(FILE_UPLOAD != null){
+                String judul = judul_surat.getText().toString();
+
+                if(judul.isEmpty()){
+
+                    KAlertDialog pDialog = new KAlertDialog(Tambahsurat.this, KAlertDialog.WARNING_TYPE);
+                    pDialog.setTitleText("Failed");
+                    pDialog.setContentText("Judul Harus di isi");
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+
+                } else if(FILE_UPLOAD != null){
 
                     KAlertDialog pDialog = new KAlertDialog(Tambahsurat.this, KAlertDialog.PROGRESS_TYPE);
                     pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -126,7 +137,7 @@ public class Tambahsurat extends AppCompatActivity {
                     pDialog.setCancelable(false);
                     pDialog.show();
 
-                    upload_Pdf(FILE_UPLOAD, FILE_UPLOAD.getName(), new CustomCallback() {
+                    upload_Pdf(FILE_UPLOAD, FILE_UPLOAD.getName(), judul, new CustomCallback() {
                         @Override
                         public String onSucess(JsonObject value) {
 
@@ -146,6 +157,8 @@ public class Tambahsurat extends AppCompatActivity {
 
                         @Override
                         public void onFailure(String s) {
+                            pDialog.dismiss();
+
                             KAlertDialog pDialog = new KAlertDialog(Tambahsurat.this, KAlertDialog.WARNING_TYPE);
                             pDialog.setTitleText("Failed");
                             pDialog.setContentText("Maaf surat gagal diupload "+s);
@@ -166,17 +179,18 @@ public class Tambahsurat extends AppCompatActivity {
 
     }
 
-    public void upload_Pdf(File fl, String filename, final CustomCallback customCallback){
+    public void upload_Pdf(File fl, String filename, String fsname, final CustomCallback customCallback){
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("application/pdf"), fl);
         RequestBody submit = RequestBody.create(MediaType.parse("text/plain"), filename);
+        RequestBody fname = RequestBody.create(MediaType.parse("text/plain"), fsname);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Config.WEB+"/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<JsonObject> call = api.uploadPdf(requestFile, submit);
+        Call<JsonObject> call = api.uploadPdf(requestFile, submit, fname);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
