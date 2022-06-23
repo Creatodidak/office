@@ -53,21 +53,21 @@ public class AdapterSK extends RecyclerView.Adapter<AdapterSK.ViewHolder> {
         privasi = SKeluarList.get(position).getprivasi();
         prioritas = SKeluarList.get(position).getprioritas();
 
-        if (privasi.equals("private")){
+        if (privasi.equals("Rahasia")){
             holder.prv.setVisibility(View.VISIBLE);
         }else{
             holder.prv.setVisibility(View.INVISIBLE);
         }
 
-        if (prioritas.equals("high")){
+        if (prioritas.equals("HIGH")){
             holder.pri.setImageResource(R.drawable.high);
         }
 
-        if (prioritas.equals("low")){
+        if (prioritas.equals("LOW")){
             holder.pri.setImageResource(R.drawable.low);
         }
 
-        if (prioritas.equals("med")){
+        if (prioritas.equals("MEDIUM")){
             holder.pri.setImageResource(R.drawable.med);
         }
 

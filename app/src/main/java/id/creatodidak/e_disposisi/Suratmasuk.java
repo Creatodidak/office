@@ -21,10 +21,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Suratmasuk extends AppCompatActivity {
-    RecyclerView rv;
+
     ProgressBar pb;
     LinearLayoutManager layoutManager;
     Adapter adapter;
+    RecyclerView rv;
     List<SuratMasuk> SMasukList = new ArrayList<>();
     ApiInterface apiInterface;
 

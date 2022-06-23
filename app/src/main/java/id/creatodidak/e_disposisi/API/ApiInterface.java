@@ -47,7 +47,18 @@ public interface ApiInterface {
 
     @Multipart
     @POST(Config.UPLOAD_URL)
-    Call<JsonObject> uploadPdf(@Part("ff\"; filename=\"file.pdf\" ") RequestBody file, @Part("submit") RequestBody filename, @Part("fname") RequestBody fsname);
+    Call<JsonObject> uploadPdf(@Part("ff\"; filename=\"file.pdf\" ") RequestBody file,
+                               @Part("submit") RequestBody filename,
+                               @Part("ss") RequestBody surat,
+                               @Part("alamat") RequestBody alamatSURAT,
+                               @Part("nomor") RequestBody noSURAT,
+                               @Part("perihal") RequestBody perihalSURAT,
+                               @Part("tanggal") RequestBody tanggalSURAT,
+                               @Part("diterima") RequestBody tanggalditerimaSURAT,
+                               @Part("sifat") RequestBody sifatSURAT,
+                               @Part("jenis") RequestBody jenisSURAT,
+                               @Part("prioritas") RequestBody prioritasSURAT,
+                               @Part("user") RequestBody Username);
 
 
 }

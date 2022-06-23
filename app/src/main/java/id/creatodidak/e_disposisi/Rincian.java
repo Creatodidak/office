@@ -30,9 +30,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Rincian extends AppCompatActivity {
     PDFView pdfView;
-    String pdfurl, url;
+    String pdfurl, url, nip;
     TextView wm1, wm2;
     ExtendedFloatingActionButton fb;
+    Session session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class Rincian extends AppCompatActivity {
         wm2 = findViewById(R.id.wmDate1);
         Date currentTime = Calendar.getInstance().getTime();
         wm1.setText(currentTime.toString());
-        wm2.setText("Properties Of POLRES LANDAK");
+        wm2.setText("POLRES LANDAK");
         fb = findViewById(R.id.tindak);
         Bundle extras = getIntent().getExtras();
         url = extras.getString("url");
@@ -52,7 +54,11 @@ public class Rincian extends AppCompatActivity {
         new RetrivePDFfromUrl().execute(pdfurl);
 
         fb.setOnClickListener(view -> ask());
+        session = new Session(this);
+        nip = session.getUserDetail().get(Session.NIP);
+        TextView wm = findViewById(R.id.wmUsername);
 
+        wm.setText(nip);
 
     }
 

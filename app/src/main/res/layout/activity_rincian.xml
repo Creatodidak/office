@@ -96,7 +96,7 @@
       app:layout_constraintTop_toTopOf="@+id/pdfView">
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/wmUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/monsbold"
